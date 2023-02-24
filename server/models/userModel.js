@@ -20,7 +20,6 @@ var userSchema = new mongoose.Schema({
     mobile: {
         type: String,
         required: true,
-        unique: true,
     },
     password: {
         type: String,
@@ -38,10 +37,9 @@ var userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    address: [{
-        type: ObjectId,
-        ref: "Address"
-    }],
+    address: {
+        type: String,
+    },
     wishlist: [{
         type: ObjectId,
         ref: "Product"
