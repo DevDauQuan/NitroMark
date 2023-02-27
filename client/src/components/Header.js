@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../images/compare.svg";
 import wishlist from "../images/wishlist.svg";
-import user from "../images/user.svg";
+import userAva from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { getaUserCart, logoutUser } from "../features/user/userSlice";
+import { getCategories } from "../features/pCategory/pCategorySlice";
+import { getProducts } from "../features/products/productSlice";
 const Header = () => {
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getProducts());
+    dispatch(getaUserCart())
+  }, [dispatch]);
+
+  const { pCategories } = useSelector((state) => state.pCategory);
+
+  const { user, orders } = useSelector((state) => state.auth);
+
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    window.location.assign("/")
+  }
   return (
     <>
       <header className="header-top-strip py-3">
@@ -33,7 +55,7 @@ const Header = () => {
           <div className="row align-items-center">
             <div className="col-2">
               <h2>
-                <Link className="text-white">Dev Corner</Link>
+                <Link className="text-white" to={"/"}>Nitro Mark</Link>
               </h2>
             </div>
             <div className="col-5">
@@ -79,10 +101,52 @@ const Header = () => {
                     to="/login"
                     className="d-flex align-items-center gap-10 text-white"
                   >
-                    <img src={user} alt="user" />
-                    <p className="mb-0">
-                      Log in <br /> My Account
-                    </p>
+                    <img src={userAva} alt="user" />
+                    {user ? (
+                      <div className="d-flex gap-3 align-items-center dropdown">
+                        <div
+                          role="button"
+                          id="dropdownMenuLink"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <p className="mb-0">Welcome back, <br /> {user.firstname}</p>
+                        </div>
+                        <NavLink className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <li>
+                            <Link
+                              className="dropdown-item py-1 mb-1"
+                              style={{ height: "auto", lineHeight: "20px" }}
+                              to={`/user/${user._id}`}
+                            // onClick={() => handleGetUser()}
+                            >
+                              View Profile
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item py-1 mb-1"
+                              style={{ height: "auto", lineHeight: "20px" }}
+                              to={`/change-password/${user._id}`}
+                            >
+                              Change Password
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item py-1 mb-1"
+                              style={{ height: "auto", lineHeight: "20px" }}
+                              onClick={() => handleLogout()}
+                            >
+                              Signout
+                            </Link>
+                          </li>
+                        </NavLink>
+                      </div>) :
+                      (<p className="mb-0">
+                        Log in <br /> My Account
+                      </p>)}
+
                   </Link>
                 </div>
                 <div>
@@ -92,8 +156,8 @@ const Header = () => {
                   >
                     <img src={cart} alt="cart" />
                     <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">$ 500</p>
+                      <span className="badge bg-white text-dark">{orders?.products?.length ? `${orders?.products?.length}` : "Empty"}</span>
+                      <p className="mb-0">{orders?.cartTotal ? `$ ${orders?.cartTotal}` : "$ 0"}</p>
                     </div>
                   </Link>
                 </div>
@@ -125,21 +189,13 @@ const Header = () => {
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
-                      <li>
-                        <Link className="dropdown-item text-white" to="">
-                          Action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="">
-                          Another action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="">
-                          Something else here
-                        </Link>
-                      </li>
+                      {pCategories.map((pCate, key) => (
+                        <li key={key}>
+                          <Link className="dropdown-item text-white" to="">
+                            {pCate.title}
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>

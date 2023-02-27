@@ -32,11 +32,7 @@ const MainLayout = () => {
 
 
   const handleGetUser = () => {
-    // navigate(`admin/user/${user._id}`);
-    navigate("/");
-
-    // window.location.assign(`admin/user/${user._id}`);
-
+    navigate(`admin/user/${user._id}`);
   }
 
   const handleLogout = () => {

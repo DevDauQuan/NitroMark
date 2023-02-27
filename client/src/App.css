@@ -36,6 +36,10 @@ a {
   box-shadow: none;
   border-color: inherit;
 }
+.error {
+  color: red;
+  font-size: 16px;
+}
 
 .gap-10 {
   gap: 10px;

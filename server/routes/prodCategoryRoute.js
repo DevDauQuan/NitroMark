@@ -7,7 +7,8 @@ router.post("/", authMiddleware, isAdmin, createCategory);
 
 router.put("/:id", authMiddleware, isAdmin, updateCategory);
 router.get("/:id", authMiddleware, isAdmin, getCategory);
-router.get("/", authMiddleware, isAdmin, getAllCategory);
+// router.get("/", authMiddleware, isAdmin, getAllCategory);
+router.get("/", getAllCategory);
 
 
 router.delete("/:id", authMiddleware, isAdmin, deleteCategory);

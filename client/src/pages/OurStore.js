@@ -5,9 +5,15 @@ import ReactStars from "react-rating-stars-component";
 import ProductCard from "../components/ProductCard";
 import Color from "../components/Color";
 import Container from "../components/Container";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4);
+  const { pCategories } = useSelector((state) => state.pCategory)
+
+
+
   return (
     <>
       <Meta title={"Our Store"} />
@@ -15,17 +21,22 @@ const OurStore = () => {
       <Container class1="store-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-3">
+            {/* Shop By Categories */}
             <div className="filter-card mb-3">
               <h3 className="filter-title">Shop By Categories</h3>
               <div>
                 <ul className="ps-0">
-                  <li>Watch</li>
-                  <li>Tv</li>
-                  <li>Camera</li>
-                  <li>Laptop</li>
+                  {pCategories.map((pCate, key) => (
+                    <li key={key}>
+                      <Link className="text-dark" to={`products/${pCate.title}`}>
+                        {pCate.title}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
+            {/* Filter By */}
             <div className="filter-card mb-3">
               <h3 className="filter-title">Filter By</h3>
               <div>
@@ -106,6 +117,7 @@ const OurStore = () => {
                 </div>
               </div>
             </div>
+            {/* Product Tags*/}
             <div className="filter-card mb-3">
               <h3 className="filter-title">Product Tags</h3>
               <div>

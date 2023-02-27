@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
@@ -7,18 +7,24 @@ import ReactImageZoom from "react-image-zoom";
 import Color from "../components/Color";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import watch from "../images/watch.jpg";
 import Container from "../components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { getAProduct } from "../features/products/productSlice";
+import { addtoCart } from "../features/user/userSlice";
 const SingleProduct = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const { id } = useParams();
   const props = {
     width: 594,
     height: 600,
     zoomWidth: 600,
-
     img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
   };
 
+  // eslint-disable-next-line
   const [orderedProduct, setorderedProduct] = useState(true);
   const copyToClipboard = (text) => {
     console.log("text", text);
@@ -29,7 +35,28 @@ const SingleProduct = () => {
     document.execCommand("copy");
     textField.remove();
   };
-  const closeModal = () => {};
+  const closeModal = () => { };
+
+  useEffect(() => {
+    dispatch(getAProduct(id));
+  }, [dispatch, id]);
+
+  const { productInfo } = useSelector((state) => state.products)
+
+
+  const handleAddtoCart = () => {
+    const values = {
+      cart: [
+        {
+          _id: id,
+          count: 3,
+          color: "Black"
+        }
+      ]
+
+    }
+    dispatch(addtoCart(values));
+  }
   return (
     <>
       <Meta title={"Product Name"} />
@@ -77,16 +104,17 @@ const SingleProduct = () => {
             <div className="main-product-details">
               <div className="border-bottom">
                 <h3 className="title">
-                  Kids Headphones Bulk 10 Pack Multi Colored For Students
+                  {productInfo?.title}
                 </h3>
               </div>
               <div className="border-bottom py-3">
-                <p className="price">$ 100</p>
+                <p className="price">$ {productInfo?.price}</p>
                 <div className="d-flex align-items-center gap-10">
                   <ReactStars
                     count={5}
                     size={24}
-                    value={4}
+                    value={productInfo && Number(productInfo?.totalrating)}
+                    // value={4}
                     edit={false}
                     activeColor="#ffd700"
                   />
@@ -103,19 +131,19 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Brand :</h3>
-                  <p className="product-data">Havells</p>
+                  <p className="product-data">{productInfo?.brand}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Category :</h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{productInfo?.category}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Tags :</h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{productInfo?.tags}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Availablity :</h3>
-                  <p className="product-data">In Stock</p>
+                  <p className="product-data">{productInfo?.quantity > 0 ? "In Stock" : "Out of Stock"}</p>
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Size :</h3>
@@ -157,6 +185,7 @@ const SingleProduct = () => {
                       data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"
                       type="button"
+                      onClick={() => handleAddtoCart()}
                     >
                       Add to Cart
                     </button>
@@ -165,12 +194,12 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex align-items-center gap-15">
                   <div>
-                    <a href="">
+                    <a href="/">
                       <TbGitCompare className="fs-5 me-2" /> Add to Compare
                     </a>
                   </div>
                   <div>
-                    <a href="">
+                    <a href="/">
                       <AiOutlineHeart className="fs-5 me-2" /> Add to Wishlist
                     </a>
                   </div>
@@ -186,7 +215,8 @@ const SingleProduct = () => {
                 <div className="d-flex gap-10 align-items-center my-3">
                   <h3 className="product-heading">Product Link:</h3>
                   <a
-                    href="javascript:void(0);"
+                    // href="javascript:void(0);"
+                    href="/"
                     onClick={() => {
                       copyToClipboard(
                         "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
@@ -207,10 +237,7 @@ const SingleProduct = () => {
             <h4>Description</h4>
             <div className="bg-white p-3">
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tenetur nisi similique illum aut perferendis voluptas, quisquam
-                obcaecati qui nobis officia. Voluptatibus in harum deleniti
-                labore maxime officia esse eos? Repellat?
+                {productInfo?.description}
               </p>
             </div>
           </div>
@@ -237,7 +264,7 @@ const SingleProduct = () => {
                 </div>
                 {orderedProduct && (
                   <div>
-                    <a className="text-dark text-decoration-underline" href="">
+                    <a className="text-dark text-decoration-underline" href="/">
                       Write a Review
                     </a>
                   </div>
@@ -311,13 +338,13 @@ const SingleProduct = () => {
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered ">
           <div className="modal-content">
-            <div className="modal-header py-0 border-0">
+            <div className="modal-header py-0 border-0 mt-3 ">
               <button
                 type="button"
                 className="btn-close"
@@ -331,15 +358,15 @@ const SingleProduct = () => {
                   <img src={watch} className="img-fluid" alt="product imgae" />
                 </div>
                 <div className="d-flex flex-column flex-grow-1 w-50">
-                  <h6 className="mb-3">Apple Watch</h6>
-                  <p className="mb-1">Quantity: asgfd</p>
-                  <p className="mb-1">Color: asgfd</p>
-                  <p className="mb-1">Size: asgfd</p>
+                  <h6 className="mb-3">{productInfo?.title}</h6>
+                  <p className="mb-1">Quantity: Chua co</p>
+                  <p className="mb-1">Color: Chua co</p>
+                  <p className="mb-1">Size: Chua co</p>
                 </div>
               </div>
             </div>
             <div className="modal-footer border-0 py-0 justify-content-center gap-30">
-              <button type="button" className="button" data-bs-dismiss="modal">
+              <button type="button" className="button border-0" data-bs-dismiss="modal" onClick={() => navigate("/cart")}>
                 View My Cart
               </button>
               <button type="button" className="button signup">

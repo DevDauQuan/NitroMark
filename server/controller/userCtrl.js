@@ -122,6 +122,7 @@ const updateUser = asyncHandler(async (req, res) => {
     validateMongoDbId(id);
     try {
         const user = await User.findByIdAndUpdate(id, req?.body, { new: true });
+        console.log(user);
         res.json(user);
     } catch (error) {
         throw new Error(error)
@@ -257,7 +258,7 @@ const forgotPasswordToken = asyncHandler(async (req, res) => {
     try {
         const token = await user.createPasswordResetToken();
         await user.save();
-        const resetUrl = `http://localhost:5000/api/user/reset-password/${token}`;
+        const resetUrl = `http://localhost:3000/reset-password/${token}`;
         const data = {
             to: email,
             text: `Reset Your Password`,
@@ -275,6 +276,7 @@ const forgotPasswordToken = asyncHandler(async (req, res) => {
 //Reset Password
 const resetPassword = asyncHandler(async (req, res) => {
     const { password } = req.body;
+    console.log(password);
     const { token } = req.params;
     const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
     const user = await User.findOne({
@@ -316,19 +318,19 @@ const userCart = asyncHandler(async (req, res) => {
         if (alreadyExistCart) {
             alreadyExistCart.remove();
         }
-
         for (let i = 0; i < cart.length; i++) {
             let object = {};
             object.product = cart[i]._id;
             object.count = cart[i].count;
             object.color = cart[i].color;
-            let getPrice = await Product.findById(cart[i]._id).select('price').exec();
+            let getPrice = await Product.findById(cart[i]._id).select('price title').exec();
+            object.title = getPrice.title;
             object.price = getPrice.price;
             products.push(object);
+            console.log(products);
         }
-
         let cartTotal = 0;
-        for (let i = 0; i < products.length; i++) {
+        for (let i = 0; i < products?.length; i++) {
             // console.log(products[i].price);
             // console.log(products[i].count);
             cartTotal = cartTotal + products[i].price * products[i].count;
@@ -339,7 +341,7 @@ const userCart = asyncHandler(async (req, res) => {
             cartTotal,
             orderby: user?._id,
         }).save();
-
+        console.log(newCart);
         res.json(newCart);
     } catch (error) {
         throw new Error(error);

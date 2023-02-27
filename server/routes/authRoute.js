@@ -24,7 +24,7 @@ router.get("/wishlist", authMiddleware, getWishlist);
 router.get('/all-users', getAllUser);
 router.get("/refresh", handleRefreshToken);
 router.get("/logout", logout)
-router.get('/:id', authMiddleware, isAdmin, getUser);
+router.get('/:id', authMiddleware, getUser);
 
 router.put('/edit-user/:id', authMiddleware, updateUser);
 router.put("/unblock-user/:id", authMiddleware, isAdmin, unblockUser);
