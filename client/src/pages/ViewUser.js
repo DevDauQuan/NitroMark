@@ -23,15 +23,10 @@ const ViewUser = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        dispatch(getUser(id));
-    }, [dispatch, id]);
-
-
     const User = useSelector((state) => state.auth);
-    const { isSuccess, isError, user, updateUser } = User.userinfo;
-    useEffect(() => {
 
+    const { isSuccess, isError, user, updateUser } = User.userinfo || {};
+    useEffect(() => {
         if (isSuccess && updateUser) {
             toast.success("Updated Successfullly!");
         }
@@ -39,6 +34,7 @@ const ViewUser = () => {
             toast.error("Something Went Wrong!");
         }
     }, [isSuccess, isError, updateUser, navigate]);
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {

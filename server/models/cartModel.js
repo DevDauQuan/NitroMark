@@ -13,6 +13,10 @@ var cartSchema = new mongoose.Schema(
                 color: String,
                 price: Number,
                 title: String,
+                images: [{
+                    public_id: String,
+                    url: String,
+                }],
             },
         ],
         cartTotal: Number,

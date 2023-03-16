@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
@@ -23,7 +23,16 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import ChangePassword from "./pages/ChangePassword";
 import ViewUser from "./pages/ViewUser";
+import { refreshToken } from "./features/user/userSlice";
+import { useDispatch } from "react-redux";
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshToken());
+  }, [dispatch]);
+
+
   return (
     <>
       <BrowserRouter>
