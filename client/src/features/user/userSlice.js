@@ -39,7 +39,11 @@ export const refreshToken = createAsyncThunk("auth/refreshtoken", async (_, thun
     }
 })
 
+<<<<<<< HEAD
 export const logoutUser = createAsyncThunk("auth/logout", async (_, thunkAPi) => {
+=======
+export const logoutUser = createAsyncThunk("auth/logout", async (thunkAPi) => {
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
     try {
         return await userService.logout();
     } catch (error) {
@@ -118,7 +122,11 @@ export const deleteProductfromCart = createAsyncThunk("user/delete-product-cart"
 }
 );
 
+<<<<<<< HEAD
 export const getWishList = createAsyncThunk("user/get-wishlist", async (_, thunkAPI) => {
+=======
+export const getWishList = createAsyncThunk("user/get-wishlist", async (thunkAPI) => {
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
     try {
         return await userService.getWishList();
     } catch (error) {
@@ -127,6 +135,7 @@ export const getWishList = createAsyncThunk("user/get-wishlist", async (_, thunk
 }
 );
 
+<<<<<<< HEAD
 export const applyCoupon = createAsyncThunk("user/apply-coupon", async (coupon, thunkAPI) => {
     try {
         console.log(coupon);
@@ -165,6 +174,8 @@ export const getDetailOrderByUserId = createAsyncThunk("user/get-detail-order", 
 }
 );
 
+=======
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
 export const authSlice = createSlice({
     name: "user",
     initialState: initialState,
@@ -354,6 +365,7 @@ export const authSlice = createSlice({
                 if (state.isError) {
                     toast.error(action.error)
                 }
+<<<<<<< HEAD
                 state.isLoading = false;
             })
             .addCase(deleteProductfromCart.pending, (state) => {
@@ -440,6 +452,42 @@ export const authSlice = createSlice({
                 state.message = action.error;
                 state.isLoading = false;
             })
+=======
+                state.isLoading = false;
+            })
+            .addCase(deleteProductfromCart.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteProductfromCart.fulfilled, (state, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.orders = action.payload;
+                state.message = "success";
+            })
+            .addCase(deleteProductfromCart.rejected, (state, action) => {
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+                state.isLoading = false;
+            })
+            .addCase(getWishList.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getWishList.fulfilled, (state, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.wishlist = action.payload;
+                state.message = "success";
+            })
+            .addCase(getWishList.rejected, (state, action) => {
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+                state.isLoading = false;
+            })
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
     }
 })
 

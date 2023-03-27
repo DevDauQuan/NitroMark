@@ -58,7 +58,11 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
         lastname: user.lastname,
         email: user.email,
         mobile: user.mobile,
+<<<<<<< HEAD
         token: refreshToken,
+=======
+        token: generateToken(user._id),
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
     });
 });
 
@@ -98,7 +102,11 @@ const loginAdmin = asyncHandler(async (req, res) => {
 //refreshToken
 const handleRefreshToken = asyncHandler(async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
+<<<<<<< HEAD
     // console.log(req.cookies);
+=======
+    console.log(req.cookies);
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
     if (!refreshToken) throw new Error("No Refresh Token in Cookies");
 
     try {
@@ -125,6 +133,10 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
 });
 //logout 
 const logout = asyncHandler(async (req, res) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
     res.clearCookie("refreshToken", {
         path: "/",
         httpOnly: true,

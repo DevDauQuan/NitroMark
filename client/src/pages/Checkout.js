@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import Container from "../components/Container";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { applyCoupon, createOrder, getaUserCart } from "../features/user/userSlice";
 import { debounce } from 'lodash';
@@ -47,6 +48,13 @@ const Checkout = () => {
     dispatch(createOrder(values))
   }
 
+=======
+import { useSelector } from "react-redux";
+
+const Checkout = () => {
+  const { orders } = useSelector((state) => state.auth);
+  const shipChart = 10;
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
   return (
     <>
       <Container class1="checkout-wrapper py-5 home-wrapper-2">
@@ -86,7 +94,11 @@ const Checkout = () => {
               </nav>
               <h4 className="title total">Contact Information</h4>
               <p className="user-details total">
+<<<<<<< HEAD
                 {userinfo?.user?.lastname} {userinfo?.user?.firstname} {`(${userinfo?.user?.email})`}
+=======
+                Nguyen Duy Nien (ngdnien@gmail.com)
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
               </p>
               <h4 className="mb-3">Shipping Infomation</h4>
               <form
@@ -187,6 +199,7 @@ const Checkout = () => {
             <div className="border-bottom py-4">
               <div className="d-flex justify-content-between align-items-center">
                 <p className="total">Subtotal</p>
+<<<<<<< HEAD
                 <p className="total-price">$ {`${orders?.cartTotal || "0"}`}</p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
@@ -196,11 +209,22 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <p className="mb-0 total">Price in Discount</p>
                 <p className="mb-0 total-price">-$ {`${orders?.cartTotal - orders?.totalAfterDiscount || "0"}`}</p>
+=======
+                <p className="total-price">$ {`${orders?.cartTotal}`}</p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
+                <p className="mb-0 total">Shipping</p>
+                <p className="mb-0 total-price">$ {`${shipChart}`}</p>
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
               </div>
             </div>
             <div className="d-flex justify-content-between align-items-center border-bootom py-4">
               <h4 className="total">Total</h4>
+<<<<<<< HEAD
               <h5 className="total-price">$ {`${orders?.totalAfterDiscount + shipChart || "0"}`}</h5>
+=======
+              <h5 className="total-price">$ {`${orders?.cartTotal + shipChart}`}</h5>
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
             </div>
             <Link onClick={handlePayment} className="button " style={{ marginLeft: "400px" }}>
               Payment

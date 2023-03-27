@@ -96,6 +96,7 @@ const getWishList = async () => {
     return response.data;
 };
 
+<<<<<<< HEAD
 const applyCoupon = async (coupon) => {
     const response = await axios.post(`${base_url}user/cart/applycoupon`, coupon, config);
     return response.data;
@@ -120,3 +121,6 @@ const getDetailOrderByUserId = async (id) => {
 
 
 export const userService = { register, login, refreshToken, logout, forgotPasswordToken, resetPassword, changePassword, getUserInfo, updateUser, addToCart, getUserCart, deleteProductfromCart, getWishList, applyCoupon, createOrder, getDetailOrderByUserId, getOrdersByUser }
+=======
+export const userService = { register, login, refreshToken, logout, forgotPasswordToken, resetPassword, changePassword, getUserInfo, updateUser, addToCart, getUserCart, deleteProductfromCart, getWishList }
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6

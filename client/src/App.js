@@ -25,8 +25,11 @@ import ChangePassword from "./pages/ChangePassword";
 import ViewUser from "./pages/ViewUser";
 import { refreshToken } from "./features/user/userSlice";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import ViewOrder from "./pages/ViewOrder";
 import DetailOrder from "./pages/DetailOrder";
+=======
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
 function App() {
   const dispatch = useDispatch();
 

@@ -7,7 +7,11 @@ import userAva from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import { getaUserCart, getOrderByUser, getUser, getWishList, logoutUser, } from "../features/user/userSlice";
+=======
+import { getaUserCart, getUser, getWishList, logoutUser, } from "../features/user/userSlice";
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
 import { getCategories } from "../features/pCategory/pCategorySlice";
 import { getProductCategory, getProductonSearch, getProducts } from "../features/products/productSlice";
 import { getBlogCategory, getBlogs } from "../features/blog/blogSlice";
@@ -22,7 +26,10 @@ const Header = () => {
     dispatch(getProducts());
     dispatch(getBlogCategory());
     dispatch(getBlogs());
+<<<<<<< HEAD
     dispatch(getOrderByUser());
+=======
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
   }, [dispatch]);
 
 
@@ -34,6 +41,10 @@ const Header = () => {
       dispatch(getaUserCart());
       dispatch(getWishList());
       dispatch(getUser(user._id));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
     }
   }, [user, dispatch])
 
