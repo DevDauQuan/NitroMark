@@ -65,7 +65,7 @@ const Productlist = () => {
     setOpen(false);
     setTimeout(() => {
       dispatch(getProducts());
-    }, 100);
+    }, 1000);
   };
   for (let i = 0; i < productState.length; i++) {
     data1.push({

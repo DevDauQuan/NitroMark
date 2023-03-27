@@ -1,20 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BlogCard = () => {
+const BlogCard = (props) => {
+
+  const getDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate();
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"];
+    const monthName = monthNames[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
+
+    return `${day} ${monthName} ${year}`;
+  }
+
+
+
   return (
     <div className="blog-card">
       <div className="card-image">
-        <img src="images/blog-1.jpg" className="img-fluid w-100" alt="blog" />
+        <img src={`${props?.props?.images[0]?.url}`} className="img-fluid w-100" alt="blog" />
       </div>
       <div className="blog-content">
-        <p className="date">1 Dec, 2022</p>
-        <h5 className="title">A beautiful sunday morning renaissance</h5>
+        <p className="date">{getDate(props?.props?.createdAt) || ""}</p>
+        <h5 className="title">{`${props?.props?.title}` || ""}</h5>
         <p className="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque quaerat
-          accusamus officia
+          {`${props?.props?.description?.split(".")[0]}...` || ""}
         </p>
-        <Link to="/blog/:id" className="button">
+        <Link to={`/blog/${props?.props?._id}`} className="button" >
           Read More
         </Link>
       </div>

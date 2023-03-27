@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
@@ -6,10 +6,34 @@ import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import Container from "../components/Container";
 import { services } from "../utils/Data";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+
+  const [specialProd, setSpecialProd] = useState([]);
+
+  const { products } = useSelector((state) => state.products);
+
+
+
+  const filterProductsByCategory = (products, category) => {
+    const filteredProducts = products?.filter((product) => product?.category === category);
+    return filteredProducts.length;
+  };
+
+  const featuredProducts = products?.filter((product) => product?.tags === "featured")
+    .map((product) => (
+      <ProductCard key={product?._id} product={product} />
+    ));
+
+  const specialProducts = products?.filter((product) => product?.tags === "special")
+    .map((product) => (
+      <SpecialProduct key={product?._id} product={product} />
+    ));
+
   return (
     <>
+      {/* banner */}
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
           <div className="col-6">
@@ -89,6 +113,8 @@ const Home = () => {
           </div>
         </div>
       </Container>
+
+      {/* Services */}
       <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
@@ -108,79 +134,70 @@ const Home = () => {
           </div>
         </div>
       </Container>
+
       <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
               <div className="d-flex gap align-items-center">
                 <div>
-                  <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
+                  <h6>Laptops</h6>
+                  <p>{filterProductsByCategory(products, "Laptop")} Items</p>
                 </div>
                 <img src="images/camera.jpg" alt="camera" />
               </div>
               <div className="d-flex gap align-items-center">
                 <div>
                   <h6>Cameras</h6>
-                  <p>10 Items</p>
+                  <p>{filterProductsByCategory(products, "Camera")} Items</p>
                 </div>
                 <img src="images/camera.jpg" alt="camera" />
               </div>
               <div className="d-flex gap align-items-center">
                 <div>
                   <h6>Smart Tv</h6>
-                  <p>10 Items</p>
+                  <p>{filterProductsByCategory(products, "TV")} Items</p>
                 </div>
                 <img src="images/tv.jpg" alt="camera" />
               </div>
               <div className="d-flex gap align-items-center">
                 <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
+                  <h6>Smart Phones</h6>
+                  <p>{filterProductsByCategory(products, "Smart Phone")} Items</p>
                 </div>
                 <img src="images/headphone.jpg" alt="camera" />
               </div>
-              <div className="d-flex gap align-items-center">
+
+
+            </div>
+            <div className="categories d-flex justify-content-between flex-wrap align-items-center">
+              <div className="d-flex gap align-items-center" style={{ width: "50%" }}>
                 <div>
-                  <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
+                  <h6>Macbook</h6>
+                  <p>{filterProductsByCategory(products, "Macbook")} Items</p>
                 </div>
                 <img src="images/camera.jpg" alt="camera" />
               </div>
-              <div className="d-flex gap align-items-center">
+              <div className="d-flex gap align-items-center" style={{ width: "50%" }}>
                 <div>
-                  <h6>Cameras</h6>
-                  <p>10 Items</p>
+                  <h6>Watchs</h6>
+                  <p>{filterProductsByCategory(products, "Watch")} Items</p>
                 </div>
                 <img src="images/camera.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Tv</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/tv.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/headphone.jpg" alt="camera" />
               </div>
             </div>
           </div>
         </div>
       </Container>
+
       <Container class1="featured-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Featured Collection</h3>
           </div>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products && products?.map((product, key) => (
+            <ProductCard product={product} key={key} />
+          ))}
         </div>
       </Container>
 
@@ -256,12 +273,10 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <SpecialProduct />
-          <SpecialProduct />
-          <SpecialProduct />
-          <SpecialProduct />
+          {specialProducts}
         </div>
       </Container>
+
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
@@ -269,12 +284,10 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {featuredProducts}
         </div>
       </Container>
+
       <Container class1="marque-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
@@ -320,15 +333,7 @@ const Home = () => {
           <div className="col-3">
             <BlogCard />
           </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
+
         </div>
       </Container>
     </>

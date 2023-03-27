@@ -41,6 +41,35 @@ a {
   font-size: 16px;
 }
 
+.hover:hover {
+  cursor: pointer;
+  color: var(--color-bf4800);
+}
+
+.hover-span:hover {
+  cursor: pointer;
+  background-color: var(--color-232f3e) !important;
+  color: white !important;
+}
+.social-link {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.social-link:hover,
+.social-link:focus {
+  background: #ddd;
+  text-decoration: none;
+  color: #555;
+}
 .gap-10 {
   gap: 10px;
 }
@@ -646,7 +675,6 @@ footer .input-group-text {
 .main-product-image img {
   width: 100% !important;
   height: 600px !important;
-  object-fit: cover;
 }
 .other-product-images {
   background-color: white;
@@ -747,3 +775,38 @@ footer .input-group-text {
   color: var(--color-777777);
 }
 /* Shipping page ends here */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination > * {
+  margin: 0 5px;
+}
+
+.pagination > * > a,
+.pagination > * > span {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination > * > a:hover,
+.pagination > * > span:hover,
+.pagination > * > a:focus,
+.pagination > * > span:focus {
+  background-color: #f2f2f2;
+}
+
+.pagination > .active-page > a,
+.pagination > .active-page > span {
+  background-color: #333;
+  color: #fff;
+}

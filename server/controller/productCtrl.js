@@ -52,7 +52,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const getProduct = asyncHandler(async (req, res) => {
     const { id } = req.params;
     try {
-        const product = await Product.findById(id);
+        const product = await Product.findById(id).populate({ path: "ratings.postedby", select: "firstname lastname" });
         res.json(product);
     } catch (error) {
         throw new Error(error);
@@ -61,6 +61,12 @@ const getProduct = asyncHandler(async (req, res) => {
 
 
 //get all product
+// Lấy danh sách tất cả sản phẩm: /api/products
+// Lấy danh sách sản phẩm với giá lớn hơn 500: /api/products?price[gte]=500
+// Lấy danh sách sản phẩm được sản xuất bởi Apple và có giá nhỏ hơn 1000: /api/products?brand=Apple&price[lt]=1000
+// Lấy danh sách sản phẩm với trường thông tin 'title' và 'price' được lấy về: /api/products?fields=title,price
+// Lấy danh sách sản phẩm được sắp xếp theo thứ tự giá tăng dần và giới hạn 10 sản phẩm trên mỗi trang, trang số 2: /api/products?sort=price&limit=10&page=2
+// /products?price[gte]=500&price[lte]=1000
 const getAllProduct = asyncHandler(async (req, res) => {
     try {
         // Filtering
@@ -107,24 +113,29 @@ const getAllProduct = asyncHandler(async (req, res) => {
     }
 });
 
+const SearchProduct = asyncHandler(async (req, res) => {
+    const keyword = req.query.title;
+    const regex = new RegExp(keyword, "i"); // tạo regex từ keyword, "i" để không phân biệt chữ hoa, chữ thường
+    const products = await Product.find({ title: { $regex: regex } });
+    res.json(products);
+})
 
 //add product to wish list
 const addToWishList = asyncHandler(async (req, res) => {
     const { _id } = req.user;
-    const { productId } = req.body;
-
+    const { id } = req.body;
     try {
         const user = await User.findById(_id);
-        const alreadyadded = user.wishlist.find((id) => id.toString() === productId.toString());
+        const alreadyAdded = user.wishlist.includes(id);
 
-        if (alreadyadded) {
+        if (alreadyAdded) {
             let user = await User.findByIdAndUpdate(_id, {
-                $pull: { wishlist: productId },
+                $pull: { wishlist: id },
             }, { new: true });
             res.json(user);
         } else {
             let user = await User.findByIdAndUpdate(_id, {
-                $push: { wishlist: productId },
+                $push: { wishlist: id },
             }, { new: true });
             res.json(user);
         }
@@ -139,6 +150,8 @@ const addToWishList = asyncHandler(async (req, res) => {
 const rating = asyncHandler(async (req, res) => {
     const { _id } = req.user;
     const { star, productId, comment } = req.body;
+    validateMongoDbId(productId);
+
     try {
         const product = await Product.findById(productId);
         let alreadyRated = product.ratings.find((userId) => userId.postedby.toString() === _id.toString());
@@ -217,4 +230,4 @@ const uploadImages = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { createProduct, getProduct, getAllProduct, updateProduct, deleteProduct, addToWishList, rating, uploadImages }
+module.exports = { createProduct, getProduct, getAllProduct, updateProduct, deleteProduct, addToWishList, rating, uploadImages, SearchProduct }

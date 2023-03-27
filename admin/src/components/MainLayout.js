@@ -36,6 +36,7 @@ const MainLayout = () => {
   }
 
   const handleLogout = () => {
+    document.cookie = 'refreshToken=; Max-Age=0;secure=true;path="/"';
     dispatch(logout());
     window.location.assign("/")
   }
