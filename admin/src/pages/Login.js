@@ -17,12 +17,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const userLogin = JSON.parse(auth);
-  // useEffect(() => {
-  //   // if (userLogin.token) {
-  //   //   navigate("/");
-  //   // }
-  // }, [auth.token, navigate])
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +31,7 @@ const Login = () => {
 
   const authState = useSelector((state) => state);
 
-  const { user, isError, isSuccess, isLoading, message } = authState.auth;
+  const { user, isSuccess, message } = authState.auth;
 
   useEffect(() => {
     if (user) {

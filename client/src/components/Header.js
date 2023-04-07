@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../images/compare.svg";
@@ -7,49 +7,62 @@ import userAva from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getaUserCart, logoutUser } from "../features/user/userSlice";
+import { getaUserCart, getOrderByUser, getUser, getWishList, logoutUser, } from "../features/user/userSlice";
 import { getCategories } from "../features/pCategory/pCategorySlice";
-import { getProducts } from "../features/products/productSlice";
+import { getProductCategory, getProductonSearch, getProducts } from "../features/products/productSlice";
+import { getBlogCategory, getBlogs } from "../features/blog/blogSlice";
+const getUserfromLocalStorage = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
+
+
 const Header = () => {
   const dispatch = useDispatch();
-
+  const [onSearch, setOnSearch] = useState();
 
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts());
-    dispatch(getaUserCart())
+    dispatch(getBlogCategory());
+    dispatch(getBlogs());
+    dispatch(getOrderByUser());
   }, [dispatch]);
 
-  const { pCategories } = useSelector((state) => state.pCategory);
 
+  const { pCategories } = useSelector((state) => state.pCategory);
   const { user, orders } = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    if (getUserfromLocalStorage) {
+      dispatch(getaUserCart());
+      dispatch(getWishList());
+      dispatch(getUser(user?._id));
+    }
+  }, [user?._id, dispatch])
+
+  const handleGetCategory = (category) => {
+    dispatch(getProductCategory(category))
+  }
+
+  const handleLoadProduct = () => {
+    dispatch(getProducts());
+  }
 
   const handleLogout = () => {
     dispatch(logoutUser());
     window.location.assign("/")
   }
+
+  const handleSetValue = (value) => {
+    setOnSearch(value);
+  }
+
+  const handleSearch = () => {
+    dispatch(getProductonSearch(onSearch));
+    setOnSearch("");
+  }
   return (
     <>
-      <header className="header-top-strip py-3">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-6">
-              <p className="text-white mb-0">
-                Free Shipping Over $100 & Free Returns
-              </p>
-            </div>
-            <div className="col-6">
-              <p className="text-end text-white mb-0">
-                Hotline:
-                <a className="text-white" href="tel:+91 8264954234">
-                  +91 8264954234
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </header>
       <header className="header-upper py-3">
         <div className="container-xxl">
           <div className="row align-items-center">
@@ -61,13 +74,20 @@ const Header = () => {
             <div className="col-5">
               <div className="input-group">
                 <input
-                  type="text"
+                  type="search"
                   className="form-control py-2"
-                  placeholder="Search Product Here..."
+                  placeholder="Enter to Search Product"
                   aria-label="Search Product Here..."
                   aria-describedby="basic-addon2"
+                  value={onSearch}
+                  onChange={(e) => handleSetValue(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch();
+                    }
+                  }}
                 />
-                <span className="input-group-text p-3" id="basic-addon2">
+                <span className="input-group-text p-3" id="basic-addon2" onClick={handleSearch}>
                   <BsSearch className="fs-6" />
                 </span>
               </div>
@@ -97,9 +117,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link
-                    to="/login"
-                    className="d-flex align-items-center gap-10 text-white"
+                  <div className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src={userAva} alt="user" />
                     {user ? (
@@ -118,9 +136,17 @@ const Header = () => {
                               className="dropdown-item py-1 mb-1"
                               style={{ height: "auto", lineHeight: "20px" }}
                               to={`/user/${user._id}`}
-                            // onClick={() => handleGetUser()}
                             >
                               View Profile
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item py-1 mb-1"
+                              style={{ height: "auto", lineHeight: "20px" }}
+                              to={`/user/list-ordered`}
+                            >
+                              View Order
                             </Link>
                           </li>
                           <li>
@@ -143,11 +169,17 @@ const Header = () => {
                           </li>
                         </NavLink>
                       </div>) :
-                      (<p className="mb-0">
-                        Log in <br /> My Account
-                      </p>)}
+                      (
+                        <Link
+                          className="dropdown-item py-1 mb-1 text-white bg-transparent"
+                          style={{ height: "auto", lineHeight: "20px" }}
+                          to={`/login`}
+                        >
+                          Login <br /> My Account
+                        </Link>
+                      )}
 
-                  </Link>
+                  </div>
                 </div>
                 <div>
                   <Link
@@ -191,7 +223,8 @@ const Header = () => {
                     >
                       {pCategories.map((pCate, key) => (
                         <li key={key}>
-                          <Link className="dropdown-item text-white" to="">
+                          <Link className="dropdown-item text-white" to={`/product?category=${pCate.title}`}
+                            onClick={() => { handleGetCategory(pCate.title) }}>
                             {pCate.title}
                           </Link>
                         </li>
@@ -201,8 +234,8 @@ const Header = () => {
                 </div>
                 <div className="menu-links">
                   <div className="d-flex align-items-center gap-15">
-                    <NavLink to="/">Home</NavLink>
-                    <NavLink to="/product">Our Store</NavLink>
+                    <NavLink to="/" onClick={() => handleLoadProduct()}>Home</NavLink>
+                    <NavLink to="/product" onClick={() => handleLoadProduct()}>Our Store</NavLink>
                     <NavLink to="/blogs">Blogs</NavLink>
                     <NavLink to="/contact">Contact</NavLink>
                   </div>
