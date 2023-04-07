@@ -48,7 +48,11 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
 
     // gửi cookie refreshToken đến trình duyệt của người dùng
     res.cookie("refreshToken", refreshToken, {
+<<<<<<< HEAD
         httpOnly: true,
+=======
+        httpOnly: true, secure: true,
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
         maxAge: 72 * 60 * 60 * 1000, // thời gian sống của cookie
     });
     // gửi phản hồi HTTP về thông tin người dùng
@@ -58,7 +62,15 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
         lastname: user.lastname,
         email: user.email,
         mobile: user.mobile,
+<<<<<<< HEAD
         token: refreshToken,
+=======
+<<<<<<< HEAD
+        token: refreshToken,
+=======
+        token: generateToken(user._id),
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     });
 });
 
@@ -98,7 +110,15 @@ const loginAdmin = asyncHandler(async (req, res) => {
 //refreshToken
 const handleRefreshToken = asyncHandler(async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
+<<<<<<< HEAD
     // console.log(req.cookies);
+=======
+<<<<<<< HEAD
+    // console.log(req.cookies);
+=======
+    console.log(req.cookies);
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     if (!refreshToken) throw new Error("No Refresh Token in Cookies");
 
     try {
@@ -125,6 +145,13 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
 });
 //logout 
 const logout = asyncHandler(async (req, res) => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     res.clearCookie("refreshToken", {
         path: "/",
         httpOnly: true,

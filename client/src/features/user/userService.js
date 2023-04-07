@@ -19,6 +19,10 @@ const login = async (user) => {
     if (response.data) {
         // Lưu thông tin người dùng vào local storage
         localStorage.setItem('user', JSON.stringify(response.data));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     }
     return response.data;
 };
@@ -30,6 +34,10 @@ const refreshToken = async () => {
         if (response.data) {
             // Lưu thông tin người dùng vào local storage
             localStorage.setItem('user', JSON.stringify(response.data));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
         }
         return response.data;
     }
@@ -95,6 +103,10 @@ const getWishList = async () => {
     return response.data;
 };
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
 const applyCoupon = async (coupon) => {
     const response = await axios.post(`${base_url}user/cart/applycoupon`, coupon, config);
     return response.data;
@@ -118,4 +130,11 @@ const getDetailOrderByUserId = async (id) => {
 
 
 
+<<<<<<< HEAD
 export const userService = { register, login, refreshToken, logout, forgotPasswordToken, resetPassword, changePassword, getUserInfo, updateUser, addToCart, getUserCart, deleteProductfromCart, getWishList, applyCoupon, createOrder, getDetailOrderByUserId, getOrdersByUser }
+=======
+export const userService = { register, login, refreshToken, logout, forgotPasswordToken, resetPassword, changePassword, getUserInfo, updateUser, addToCart, getUserCart, deleteProductfromCart, getWishList, applyCoupon, createOrder, getDetailOrderByUserId, getOrdersByUser }
+=======
+export const userService = { register, login, refreshToken, logout, forgotPasswordToken, resetPassword, changePassword, getUserInfo, updateUser, addToCart, getUserCart, deleteProductfromCart, getWishList }
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8

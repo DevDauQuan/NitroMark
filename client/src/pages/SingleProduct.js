@@ -103,8 +103,13 @@ const SingleProduct = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <Meta title={`${productInfo?.title}`} />
       <BreadCrumb title={`${productInfo?.title}`} />
+=======
+      <Meta title={"Product Name"} />
+      <BreadCrumb title="Product Name" />
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
       <Container class1="main-product-wrapper py-5 home-wrapper-2" >
         <div className="row">
           <div className="col-6">
@@ -112,7 +117,11 @@ const SingleProduct = () => {
               <div>
                 <TransformWrapper defaultScale={1} defaultPositionX={100} defaultPositionY={200}>
                   <TransformComponent>
+<<<<<<< HEAD
                     <img src={imgZoom} alt="" style={{ objectFit: "contain" }} />
+=======
+                    <img src={imgZoom} alt="" />
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
                   </TransformComponent>
 
                 </TransformWrapper>

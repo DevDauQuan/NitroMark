@@ -2,7 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BlogCard = (props) => {
+<<<<<<< HEAD
   // console.log(props);
+=======
+
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
   const getDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getUTCDate();

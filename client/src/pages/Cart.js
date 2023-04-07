@@ -14,7 +14,14 @@ const Cart = () => {
 
   const handleRemoveItem = (id) => {
     dispatch(deleteProductfromCart(id));
+<<<<<<< HEAD
     // console.log(id);
+=======
+<<<<<<< HEAD
+    // console.log(id);
+=======
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     setTimeout(() => {
       dispatch(getaUserCart());
     }, 3000)
@@ -57,7 +64,15 @@ const Cart = () => {
                         id="" />
                     </div>
                     <div>
+<<<<<<< HEAD
                       <AiFillDelete className="text-danger" onClick={() => handleRemoveItem(product?.product?._id)} />
+=======
+<<<<<<< HEAD
+                      <AiFillDelete className="text-danger" onClick={() => handleRemoveItem(product?.product?._id)} />
+=======
+                      <AiFillDelete className="text-danger" onClick={() => handleRemoveItem(product?.product._id)} />
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
                     </div>
                   </div><div className="cart-col-4">
                     <h5 className="price">$ {`${product.count * product.price}`}</h5>

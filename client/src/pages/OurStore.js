@@ -268,7 +268,11 @@ const OurStore = () => {
                 {products
                   .slice(pagesVisited, pagesVisited + productsPerPage)
                   .map((product, index) => (
+<<<<<<< HEAD
                     <ProductCard key={index} product={product} grid={grid} />
+=======
+                    <ProductCard key={index} product={product} />
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
                   ))}
               </div>
               <ReactPaginate

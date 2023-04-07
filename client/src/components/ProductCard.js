@@ -1,21 +1,36 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation, useParams } from "react-router-dom";
 import wish from "../images/wish.svg";
 import wishred from "../images/wishred.svg";
+=======
+import React, { useEffect } from "react";
+import ReactStars from "react-rating-stars-component";
+import { Link, useLocation, useParams } from "react-router-dom";
+import prodcompare from "../images/prodcompare.svg";
+import wish from "../images/wish.svg";
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 import { addToWishList } from "../features/products/productSlice";
 import { addtoCart, getWishList } from "../features/user/userSlice";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
+=======
+import { useDispatch } from "react-redux";
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
 
 
 const ProductCard = (props) => {
   const { grid, product } = props;
   let location = useLocation();
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const [inWishlist, setInWishList] = useState(false);
   const { wishlist } = useSelector((state) => state.products);
+=======
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
 
   const { id } = useParams();
 
@@ -23,6 +38,7 @@ const ProductCard = (props) => {
     window.scrollTo(0, 0);
   }, [id]);
 
+<<<<<<< HEAD
 
   useEffect(() => {
     if (wishlist?.wishlist.includes(product?._id)) {
@@ -33,6 +49,8 @@ const ProductCard = (props) => {
     }
   }, [product?._id, wishlist?.wishlist])
 
+=======
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
   const handleAddtoWishList = (e) => {
     e.preventDefault();
     const values = {
@@ -73,7 +91,11 @@ const ProductCard = (props) => {
         >
           <div className="wishlist-icon position-absolute">
             <button className="border-0 bg-transparent">
+<<<<<<< HEAD
               <img src={inWishlist ? wishred : wish} alt="wishlist" onClick={(e) => handleAddtoWishList(e)} />
+=======
+              <img src={wish} alt="wishlist" onClick={(e) => handleAddtoWishList(e)} />
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
             </button>
           </div>
           <div className="product-image" >

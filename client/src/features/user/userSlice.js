@@ -39,7 +39,15 @@ export const refreshToken = createAsyncThunk("auth/refreshtoken", async (_, thun
     }
 })
 
+<<<<<<< HEAD
 export const logoutUser = createAsyncThunk("auth/logout", async (_, thunkAPi) => {
+=======
+<<<<<<< HEAD
+export const logoutUser = createAsyncThunk("auth/logout", async (_, thunkAPi) => {
+=======
+export const logoutUser = createAsyncThunk("auth/logout", async (thunkAPi) => {
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     try {
         return await userService.logout();
     } catch (error) {
@@ -118,7 +126,15 @@ export const deleteProductfromCart = createAsyncThunk("user/delete-product-cart"
 }
 );
 
+<<<<<<< HEAD
 export const getWishList = createAsyncThunk("user/get-wishlist", async (_, thunkAPI) => {
+=======
+<<<<<<< HEAD
+export const getWishList = createAsyncThunk("user/get-wishlist", async (_, thunkAPI) => {
+=======
+export const getWishList = createAsyncThunk("user/get-wishlist", async (thunkAPI) => {
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     try {
         return await userService.getWishList();
     } catch (error) {
@@ -127,6 +143,10 @@ export const getWishList = createAsyncThunk("user/get-wishlist", async (_, thunk
 }
 );
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
 export const applyCoupon = createAsyncThunk("user/apply-coupon", async (coupon, thunkAPI) => {
     try {
         console.log(coupon);
@@ -151,11 +171,14 @@ export const getOrderByUser = createAsyncThunk("user/get-orders", async (_, thun
     try {
         return await userService.getOrdersByUser();
     } catch (error) {
+<<<<<<< HEAD
         if (error) {
             // Token hết hạn, xóa thông tin người dùng khỏi localStorage và chuyển hướng đến trang đăng nhập
             thunkAPI.dispatch(logoutUser());
             window.location.assign("/")
         }
+=======
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
         return thunkAPI.rejectWithValue(error);
     }
 }
@@ -170,6 +193,11 @@ export const getDetailOrderByUserId = createAsyncThunk("user/get-detail-order", 
 }
 );
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
 export const authSlice = createSlice({
     name: "user",
     initialState: initialState,
@@ -229,12 +257,15 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 state.isLoading = false;
+<<<<<<< HEAD
                 if (action.error.status === 401) {
                     // Token hết hạn, xóa thông tin người dùng khỏi localStorage và chuyển hướng đến trang đăng nhập
                     // localStorage.removeItem("user");
                     // toast.error("Please Login now");
                     console.log(action.error);
                 }
+=======
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
             })
             .addCase(getUser.pending, (state) => {
                 state.isLoading = true;
@@ -368,6 +399,10 @@ export const authSlice = createSlice({
                 if (state.isError) {
                     toast.error(action.error)
                 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
                 state.isLoading = false;
             })
             .addCase(deleteProductfromCart.pending, (state) => {
@@ -438,7 +473,10 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 state.isLoading = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
             })
             .addCase(getDetailOrderByUserId.pending, (state) => {
                 state.isLoading = true;
@@ -455,6 +493,45 @@ export const authSlice = createSlice({
                 state.message = action.error;
                 state.isLoading = false;
             })
+<<<<<<< HEAD
+=======
+=======
+                state.isLoading = false;
+            })
+            .addCase(deleteProductfromCart.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteProductfromCart.fulfilled, (state, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.orders = action.payload;
+                state.message = "success";
+            })
+            .addCase(deleteProductfromCart.rejected, (state, action) => {
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+                state.isLoading = false;
+            })
+            .addCase(getWishList.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getWishList.fulfilled, (state, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.wishlist = action.payload;
+                state.message = "success";
+            })
+            .addCase(getWishList.rejected, (state, action) => {
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+                state.isLoading = false;
+            })
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
     }
 })
 
