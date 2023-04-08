@@ -12,7 +12,16 @@ export const getUsers = createAsyncThunk(
   }
 );
 
-
+export const getUsersonSearch = createAsyncThunk(
+  "product/get-users-onSearch",
+  async (value, thunkAPI) => {
+    try {
+      return await customerService.getUsersSearch(value);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 
 const initialState = {
@@ -38,6 +47,21 @@ export const customerSlice = createSlice({
         state.customers = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(getUsersonSearch.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUsersonSearch.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.customers = action.payload;
+      })
+      .addCase(getUsersonSearch.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

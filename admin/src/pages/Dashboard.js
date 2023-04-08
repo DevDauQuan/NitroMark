@@ -8,8 +8,7 @@ import { AiFillDelete } from "react-icons/ai";
 import ReportLabel from "../components/ReportLabel";
 import { getUsers } from "../features/cutomers/customerSlice";
 import { getProducts } from "../features/product/productSlice";
-import { getBrands } from "../features/brand/brandSlice";
-import { getCategories } from "../features/bcategory/bcategorySlice";
+
 
 const columns = [
   {
@@ -36,10 +35,10 @@ const columns = [
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const authState = useSelector((state) => state);
 
-  const { user, isError, isSuccess, isLoading, message } = authState.auth;
+  const { user } = authState.auth;
 
 
   useEffect(() => {

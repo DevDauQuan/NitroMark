@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../features/cutomers/customerSlice";
+import { getUsers, getUsersonSearch } from "../features/cutomers/customerSlice";
 import { Link } from "react-router-dom";
 import { BiEdit, BiBlock } from "react-icons/bi";
 import { AiFillDelete, AiOutlineCheckCircle } from "react-icons/ai";
 import CustomModal from "../components/CustomModal";
 import { blockAUser, deleteAUser, unBlockAUser } from "../features/auth/authSlice";
+import { BsSearch } from "react-icons/bs";
 const columns = [
   {
     title: "SNo",
@@ -32,12 +33,12 @@ const columns = [
 ];
 
 const Customers = () => {
-
+  const [onSearch, setOnSearch] = useState();
   const [open, setOpen] = useState(false);
-  const [colorId, setcolorId] = useState("");
+  const [UserId, setUserId] = useState("");
   const showModal = (e) => {
     setOpen(true);
-    setcolorId(e);
+    setUserId(e);
   };
 
   const hideModal = () => {
@@ -88,7 +89,7 @@ const Customers = () => {
     }
   }
 
-  const deleteColor = (e) => {
+  const deleteUser = (e) => {
     dispatch(deleteAUser(e));
     setOpen(false);
     setTimeout(() => {
@@ -101,7 +102,7 @@ const Customers = () => {
     setOpen(false);
     setTimeout(() => {
       dispatch(getUsers());
-    }, 1000);
+    }, 3000);
   };
 
   const handleUnBlock = (e) => {
@@ -109,12 +110,41 @@ const Customers = () => {
     setOpen(false);
     setTimeout(() => {
       dispatch(getUsers());
-    }, 1000);
+    }, 3000);
   };
-
+  const handleSetValue = (value) => {
+    setOnSearch(value);
+  }
+  const handleSearch = () => {
+    dispatch(getUsersonSearch(onSearch));
+    setOnSearch("");
+  }
   return (
     <div>
-      <h3 className="mb-4 title">Customers</h3>
+      <div className="d-flex align-items-center justify-content-between">
+        <h3 className="mb-4 title">Customers</h3>
+        <div className="col-5 mb-4">
+          <div className="input-group">
+            <input
+              type="search"
+              className="form-control py-2"
+              placeholder="Enter email to Search Users"
+              aria-label="Search Product Here..."
+              aria-describedby="basic-addon2"
+              value={onSearch}
+              onChange={(e) => handleSetValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch();
+                }
+              }}
+            />
+            <span className="input-group-text" id="basic-addon2" onClick={handleSearch}>
+              <BsSearch className="fs-6" />
+            </span>
+          </div>
+        </div>
+      </div>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
@@ -122,7 +152,7 @@ const Customers = () => {
         hideModal={hideModal}
         open={open}
         performAction={() => {
-          deleteColor(colorId);
+          deleteUser(UserId);
         }}
         title="Are you sure you want to delete this color?"
       />

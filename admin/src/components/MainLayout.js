@@ -1,34 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import {
   AiOutlineDashboard,
   AiOutlineShoppingCart,
   AiOutlineUser,
-  AiOutlineBgColors,
 } from "react-icons/ai";
 import { RiCouponLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useParams, NavLink, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { ImBlog } from "react-icons/im";
-import { IoIosNotifications } from "react-icons/io";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { SiBrandfolder } from "react-icons/si";
 import { BiCategoryAlt } from "react-icons/bi";
 import { Layout, Menu, theme } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAUser, logout } from "../features/auth/authSlice";
+import { logout } from "../features/auth/authSlice";
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
   const [collapsed, setCollapsed] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { token: { colorBgContainer }, } = theme.useToken();
   const navigate = useNavigate();
-  const location = useLocation();
 
 
   const handleGetUser = () => {
@@ -36,6 +32,7 @@ const MainLayout = () => {
   }
 
   const handleLogout = () => {
+    document.cookie = 'refreshToken=; Max-Age=0;secure=true;path="/"';
     dispatch(logout());
     window.location.assign("/")
   }
@@ -104,16 +101,16 @@ const MainLayout = () => {
                   icon: <BiCategoryAlt className="fs-4" />,
                   label: "Category List",
                 },
-                {
-                  key: "color",
-                  icon: <AiOutlineBgColors className="fs-4" />,
-                  label: "Color",
-                },
-                {
-                  key: "list-color",
-                  icon: <AiOutlineBgColors className="fs-4" />,
-                  label: "Color List",
-                },
+                // {
+                //   key: "color",
+                //   icon: <AiOutlineBgColors className="fs-4" />,
+                //   label: "Color",
+                // },
+                // {
+                //   key: "list-color",
+                //   icon: <AiOutlineBgColors className="fs-4" />,
+                //   label: "Color List",
+                // },
               ],
             },
             {
@@ -206,7 +203,7 @@ const MainLayout = () => {
                   <Link
                     className="dropdown-item py-1 mb-1"
                     style={{ height: "auto", lineHeight: "20px" }}
-                    // to={`/admin/user/${user._id}`}
+                    to={`/admin/get-user/${user._id}`}
                     onClick={() => handleGetUser()}
                   >
                     View Profile

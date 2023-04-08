@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
-import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -29,9 +28,9 @@ let schema = yup.object().shape({
 
 const Addproduct = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const [color, setColor] = useState([]);
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
 
   // console.log(color);
 
@@ -198,7 +197,7 @@ const Addproduct = () => {
             id=""
           >
             <option value="" disabled>
-              Select Category
+              Select Tags
             </option>
             <option value="featured">Featured</option>
             <option value="popular">Popular</option>

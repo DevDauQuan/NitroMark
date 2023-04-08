@@ -23,6 +23,15 @@ export const login = createAsyncThunk(
   }
 );
 
+export const refreshToken = createAsyncThunk("auth/refreshtoken", async (_, thunkAPi) => {
+  try {
+    return await authService.refreshToken();
+  } catch (error) {
+    return thunkAPi.rejectWithValue(error);
+  }
+})
+
+
 export const logout = createAsyncThunk(
   "auth/logout",
   async (thunkAPI) => {
@@ -121,6 +130,8 @@ export const updateAUser = createAsyncThunk(
     }
   }
 );
+
+
 export const authSlice = createSlice({
   name: "auth",
   initialState: initialState,

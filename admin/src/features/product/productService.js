@@ -34,12 +34,18 @@ const deleteProduct = async (id) => {
 
   return response.data;
 };
+
+const getProductSearch = async (value) => {
+  const response = await axios.get(`${base_url}product/search?title=${value}`);
+  return response.data;
+};
 const productService = {
   getProducts,
   createProduct,
   getaProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  getProductSearch
 };
 
 export default productService;

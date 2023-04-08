@@ -19,13 +19,21 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require('cors');
 
+const corsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type,Authorization,X-Requested-With",
+    exposedHeaders: "Content-Range,X-Content-Range",
+    credentials: true,
+    optionsSuccessStatus: 200
+};
 
 dbConnect();
-app.use(cors());
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 app.use("/api/user", authRouter);
 app.use("/api/product", productRoute);
@@ -45,3 +53,5 @@ app.use(errorHandler);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
+
+module.exports = app;

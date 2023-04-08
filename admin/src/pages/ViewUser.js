@@ -73,7 +73,7 @@ const ViewUser = () => {
                 >
                     <CustomInput
                         type="text"
-                        label="Enter Product Title"
+                        label="Enter Your First"
                         name="firstname"
                         onChng={formik.handleChange("firstname")}
                         onBlr={formik.handleBlur("firstname")}
@@ -95,7 +95,7 @@ const ViewUser = () => {
                     </div>
                     <CustomInput
                         type="email"
-                        label="Enter Product Price"
+                        label="Enter Your Email"
                         name="email"
                         onChng={formik.handleChange("email")}
                         onBlr={formik.handleBlur("email")}
@@ -107,7 +107,7 @@ const ViewUser = () => {
 
                     <CustomInput
                         type="text"
-                        label="Enter Product Price"
+                        label="Enter Your Phone Number"
                         name="mobile"
                         onChng={formik.handleChange("mobile")}
                         onBlr={formik.handleBlur("mobile")}
@@ -117,17 +117,24 @@ const ViewUser = () => {
                         {formik.touched.mobile && formik.errors.mobile}
                     </div>
 
-                    <CustomInput
-                        type="text"
-                        label="Enter Product Price"
-                        name="role"
-                        onChng={formik.handleChange("role")}
-                        onBlr={formik.handleBlur("role")}
-                        val={formik.values.role}
-                    />
+                    <select
+                        name="tags"
+                        onChange={formik.handleChange("role")}
+                        onBlur={formik.handleBlur("role")}
+                        value={formik.values.role}
+                        className="form-control py-3 mb-3"
+                    >
+                        <option value="" disabled>
+                            Select Roles
+                        </option>
+                        <option value="featured">Admin</option>
+                        <option value="popular">User</option>
+                    </select>
+
                     <div className="error">
                         {formik.touched.role && formik.errors.role}
                     </div>
+
                     <CustomInput
                         type="text"
                         label="Enter Product Price"
@@ -136,6 +143,7 @@ const ViewUser = () => {
                         onBlr={formik.handleBlur("address")}
                         val={formik.values.address}
                     />
+
                     <div className="error">
                         {formik.touched.address && formik.errors.address}
                     </div>

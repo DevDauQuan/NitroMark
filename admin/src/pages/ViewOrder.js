@@ -3,7 +3,7 @@ import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillDelete } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
-import { getOrderByUser, getOrders } from "../features/auth/authSlice";
+import { getOrderByUser } from "../features/auth/authSlice";
 
 const columns = [
   {

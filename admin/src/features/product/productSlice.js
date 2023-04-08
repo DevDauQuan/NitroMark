@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import productService from "./productService";
 
 export const getProducts = createAsyncThunk(
@@ -58,6 +59,17 @@ export const deleteAProduct = createAsyncThunk(
     }
   }
 )
+
+export const getProductonSearch = createAsyncThunk(
+  "product/get-product-onSearch",
+  async (value, thunkAPI) => {
+    try {
+      return await productService.getProductSearch(value);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -111,6 +123,10 @@ export const productSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.updatedProduct = action.payload;
+        if (state.isSuccess) {
+          toast.success("Updated Successfully");
+          window.location.assign("/admin/list-product");
+        }
       })
       .addCase(updateAProduct.rejected, (state, action) => {
         state.isLoading = false;
@@ -132,7 +148,8 @@ export const productSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
-      }).addCase(deleteAProduct.pending, (state) => {
+      })
+      .addCase(deleteAProduct.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(deleteAProduct.fulfilled, (state, action) => {
@@ -147,6 +164,23 @@ export const productSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
+      .addCase(getProductonSearch.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductonSearch.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.products = action.payload;
+      })
+      .addCase(getProductonSearch.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+
+
       .addCase(resetState, () => initialState);
   },
 });

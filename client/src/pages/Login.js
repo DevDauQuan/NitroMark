@@ -8,7 +8,6 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
-import { toast } from "react-toastify";
 
 
 let schema = yup.object().shape({
@@ -37,13 +36,12 @@ const Login = () => {
 
   const authState = useSelector((state) => state);
 
-  const { user, isSuccess, message } = authState.auth;
+  const { user, isSuccess } = authState.auth;
 
   useEffect(() => {
     if (user && isSuccess) {
       // console.log(user);
       window.location.assign("/");
-      toast.success("Login Successfullly!");
     }
   }, [user, navigate, isSuccess]);
 
@@ -82,9 +80,9 @@ const Login = () => {
                 <div className="error mt-2">
                   {formik.touched.password && formik.errors.password}
                 </div>
-                <div className="error">
+                {/* <div className="error">
                   {message.message === "Rejected" ? "Your email or password incorrected" : ""}
-                </div>
+                </div> */}
                 <div className="position-relative">
                   <Link to="/forgot-password" className="position-absolute top-0 end-0 fs-5">Forgot Password?</Link>
                 </div>

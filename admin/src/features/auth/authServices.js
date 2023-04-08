@@ -1,16 +1,35 @@
 import axios from "axios";
-import { config } from "../../utils/axiosconfig";
+import { config, getDataAPI, postDataAPI } from "../../utils/axiosconfig";
 import { base_url } from "../../utils/baseUrl";
+
 const login = async (user) => {
-  const response = await axios.post(`${base_url}user/admin-login`, user);
+  // Gọi hàm login
+  const response = await postDataAPI(`user/admin-login`, user, config);
+  // Nếu phản hồi thành công
   if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data));
+    // Lưu thông tin người dùng vào local storage
+    localStorage.setItem('user', JSON.stringify(response.data));
+
   }
   return response.data;
 };
 
-const logout = async (user) => {
-  const response = await axios.get(`${base_url}user/logout`);
+const refreshToken = async () => {
+  const firstLogin = localStorage.getItem("user");
+  if (firstLogin) {
+    const response = await getDataAPI(`user/refresh`, { withCredentials: true });
+    if (response.data) {
+      // Lưu thông tin người dùng vào local storage
+      localStorage.setItem('user', JSON.stringify(response.data));
+
+    }
+    return response.data;
+  }
+};
+
+
+const logout = async () => {
+  const response = await getDataAPI(`user/logout`, {}, true);
   if (response.data) {
     localStorage.removeItem("user");
   }
@@ -84,7 +103,8 @@ const authService = {
   deleteUser,
   blockUser,
   unBlockUser,
-  updateUser
+  updateUser,
+  refreshToken,
 };
 
 export default authService;
