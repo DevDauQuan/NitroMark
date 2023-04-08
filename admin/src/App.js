@@ -28,8 +28,19 @@ import ViewProduct from "./pages/ViewProduct";
 import ViewUser from "./pages/ViewUser";
 
 import PrivateRouter from "./privateRoute/priveRouter";
+<<<<<<< HEAD
 
+=======
+// import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
+// import { refreshToken } from "./features/auth/authSlice";
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 function App() {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(refreshToken());
+  // }, [dispatch]);
 
   return (
     <Router>

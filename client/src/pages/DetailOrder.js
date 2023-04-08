@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 import { Link, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetailOrderByUserId } from "../features/user/userSlice";
+<<<<<<< HEAD
+=======
+import { debounce } from 'lodash';
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -17,7 +25,10 @@ const Checkout = () => {
     const { userinfo } = useSelector((state) => state.auth);
     const { detailOrder } = useSelector((state) => state.auth)
 
+<<<<<<< HEAD
     console.log(detailOrder);
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
     return (
         <>
@@ -98,7 +109,11 @@ const Checkout = () => {
                                         name="mobile"
                                         placeholder="Phone Number"
                                         className="form-control"
+<<<<<<< HEAD
                                         defaultValue={userinfo?.user?.mobile || ""}
+=======
+                                        defaultValue={userinfo?.user?.mobile}
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                                     />
                                 </div>
                                 <div className="flex-grow-1">
@@ -110,10 +125,19 @@ const Checkout = () => {
                                     />
                                 </div>
                                 <div className="w-100">
+<<<<<<< HEAD
                                     <Link to="/cart" className="text-dark d-flex  align-items-center">
                                         <BiArrowBack className="me-2" />
                                         Return to Cart
                                     </Link>
+=======
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <Link to="/cart" className="text-dark">
+                                            <BiArrowBack className="me-2" />
+                                            Return to Cart
+                                        </Link>
+                                    </div>
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                                 </div>
                             </form>
                         </div>
@@ -132,6 +156,7 @@ const Checkout = () => {
                                                 >
                                                     {`${product?.count}`}
                                                 </span>
+<<<<<<< HEAD
                                                 <img className="img-fluid" src={product?.product?.images[0]?.url || ""} alt="product" />
                                             </div>
                                             <div>
@@ -141,6 +166,17 @@ const Checkout = () => {
                                         </div>
                                         <div className="flex-grow-1">
                                             <h5 className="total">$ {`${product?.product?.price * product?.count}`}</h5>
+=======
+                                                <img className="img-fluid" src={product?.product.images[0]?.url || ""} alt="product" />
+                                            </div>
+                                            <div>
+                                                <h5 className="total-price">Total price</h5>
+                                                <p className="total-price">$ {`${product?.product.price}`}</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex-grow-1">
+                                            <h5 className="total">$ {`${product?.product.price * product?.count}`}</h5>
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                                         </div>
                                     </div>
                                 ))}

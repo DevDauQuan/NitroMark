@@ -5,16 +5,25 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import { deleteProductfromCart, getaUserCart, updateProductFromCart } from "../features/user/userSlice";
 import { toast } from "react-toastify";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { orders, userinfo } = useSelector((state) => state.auth);
+=======
+import { deleteProductfromCart, getaUserCart } from "../features/user/userSlice";
+
+const Cart = () => {
+  const dispatch = useDispatch();
+  const { orders } = useSelector((state) => state.auth);
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 
   const handleRemoveItem = (id) => {
     dispatch(deleteProductfromCart(id));
+<<<<<<< HEAD
     // console.log(id);
     setTimeout(() => {
       dispatch(getaUserCart());
@@ -29,6 +38,16 @@ const Cart = () => {
     dispatch(updateProductFromCart(value));
 
     console.log(value);
+=======
+<<<<<<< HEAD
+    // console.log(id);
+=======
+<<<<<<< HEAD
+    // console.log(id);
+=======
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     setTimeout(() => {
       dispatch(getaUserCart());
     }, 3000)
@@ -64,6 +83,7 @@ const Cart = () => {
                       <input
                         className="form-control"
                         type="number"
+<<<<<<< HEAD
                         min={1}
                         max={10}
                         defaultValue={`${product.count}` || ""}
@@ -72,6 +92,24 @@ const Cart = () => {
                     </div>
                     <div>
                       <AiFillDelete className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleRemoveItem(product?.product?._id)} />
+=======
+                        name=""
+                        min={1}
+                        max={10}
+                        defaultValue={`${product.count}` || ""}
+                        id="" />
+                    </div>
+                    <div>
+<<<<<<< HEAD
+                      <AiFillDelete className="text-danger" onClick={() => handleRemoveItem(product?.product?._id)} />
+=======
+<<<<<<< HEAD
+                      <AiFillDelete className="text-danger" onClick={() => handleRemoveItem(product?.product?._id)} />
+=======
+                      <AiFillDelete className="text-danger" onClick={() => handleRemoveItem(product?.product._id)} />
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                     </div>
                   </div><div className="cart-col-4">
                     <h5 className="price">$ {`${product.count * product.price}`}</h5>

@@ -6,7 +6,11 @@ import { BiPhoneCall, BiInfoCircle } from "react-icons/bi";
 import Container from "../components/Container";
 import * as yup from "yup";
 import { useFormik } from "formik";
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
+=======
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 import { createEnquiry } from "../features/enquiries/enquiriesSlice";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/

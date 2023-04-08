@@ -8,10 +8,15 @@ import { Link } from "react-router-dom";
 import { getProductCategory, getProductinStock, getProductoutStock, getProductPrice, getProductPriceFrom, getProductPriceTo, getProducts, getProductTags } from "../features/products/productSlice";
 import { debounce } from 'lodash';
 import ReactPaginate from "react-paginate";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 const OurStore = () => {
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
   const [grid, setGrid] = useState(4);
   const [pageNumber, setPageNumber] = useState(0);
   const [sort, setSort] = useState("");
@@ -21,6 +26,16 @@ const OurStore = () => {
   // Value of price from -> to
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
+=======
+  const [pageNumber, setPageNumber] = useState(0);
+  const productsPerPage = 6;
+  const pagesVisited = pageNumber * productsPerPage;
+
+  // Value of price from -> to
+  const [priceFrom, setPriceFrom] = useState("");
+  const [priceTo, setPriceTo] = useState("");
+  const [grid, setGrid] = useState(4);
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const [isCheckedOut, setIsCheckedOut] = useState(false);
 
@@ -81,6 +96,7 @@ const OurStore = () => {
     dispatch(getProductTags(tags))
   }
 
+<<<<<<< HEAD
   const handleSortChange = (event) => {
     setSort(event.target.value);
   };
@@ -104,6 +120,20 @@ const OurStore = () => {
   })
 
   // console.log(sort, sortedProducts);
+=======
+  const featuredProducts = products
+    .filter((product) => product.tags === "featured")
+    .map((product) => (
+      <ProductCard key={product.id} product={product} />
+    ));
+
+  // const sort = products
+  //   .filter((product) => product.tags === "featured")
+  //   .sort((a, b) => a.name.localeCompare(b.name)) // Sắp xếp theo tên từ a đến z
+  //   .map((product) => (
+  //     <ProductCard key={product.id} grid={grid} product={product} />
+  //   ));
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
   return (
     <>
@@ -183,6 +213,14 @@ const OurStore = () => {
                     <label htmlFor="floatingInput1">To</label>
                   </div>
                 </div>
+<<<<<<< HEAD
+=======
+                <h5 className="sub-title">Colors</h5>
+                <div>
+                  <Color />
+                </div>
+
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
               </div>
             </div>
             {/* Product Tags*/}
@@ -224,8 +262,13 @@ const OurStore = () => {
                     <option value="title-descending">
                       Alphabetically, Z-A
                     </option>
+<<<<<<< HEAD
                     <option value="price-ascending" >Price, low to high</option>
                     <option value="price-descending" >Price, high to low</option>
+=======
+                    <option value="price-ascending">Price, low to high</option>
+                    <option value="price-descending">Price, high to low</option>
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                   </select>
                 </div>
                 <div className="d-flex align-items-center gap-10">
@@ -270,11 +313,23 @@ const OurStore = () => {
             </div>
             <div className="products-list pb-5">
               <div className="d-flex gap-10 flex-wrap">
+<<<<<<< HEAD
                 {sortedProducts
                   .slice(pagesVisited, pagesVisited + productsPerPage)
                   .map((product) => {
                     return <ProductCard key={product._id} product={product} grid={grid} />;
                   })}
+=======
+                {products
+                  .slice(pagesVisited, pagesVisited + productsPerPage)
+                  .map((product, index) => (
+<<<<<<< HEAD
+                    <ProductCard key={index} product={product} grid={grid} />
+=======
+                    <ProductCard key={index} product={product} />
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+                  ))}
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
               </div>
               <ReactPaginate
                 previousLabel={"Previous"}

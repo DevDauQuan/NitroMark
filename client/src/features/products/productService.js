@@ -40,12 +40,15 @@ const getProductPrice = async (from, to) => {
   return response.data;
 };
 
+<<<<<<< HEAD
 const getProductPriceReverse = async (from, to) => {
   const response = await axios.get(`${base_url}product?price[gte]=${from}&price[lte]=${to}&sort=-price`);
   return response.data;
 };
 
 
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 const getProductPriceFrom = async (from) => {
   const response = await axios.get(`${base_url}product?price[gte]=${from}`);
   return response.data;
@@ -71,8 +74,11 @@ const getProductSearch = async (value) => {
   return response.data;
 };
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 const productService = {
   getProducts,
   getaProduct,
@@ -85,8 +91,12 @@ const productService = {
   getProductPriceTo,
   getProductInStock,
   getProductOutStock,
+<<<<<<< HEAD
   getProductSearch,
   getProductPriceReverse
+=======
+  getProductSearch
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 };
 
 export default productService;

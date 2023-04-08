@@ -80,6 +80,7 @@ export const getProductPrice = createAsyncThunk(
   }
 );
 
+<<<<<<< HEAD
 export const getProductPriceReverse = createAsyncThunk(
   "product/price-product-reverse",
   async (values, thunkAPI) => {
@@ -91,6 +92,8 @@ export const getProductPriceReverse = createAsyncThunk(
   }
 );
 
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 export const getProductPriceFrom = createAsyncThunk(
   "product/price-product-from",
   async (from, thunkAPI) => {
@@ -146,6 +149,7 @@ export const getProductonSearch = createAsyncThunk(
   }
 );
 
+<<<<<<< HEAD
 export const getBestSellers = createAsyncThunk(
   "product/get-product-best-sale",
   async (_, thunkAPI) => {
@@ -156,6 +160,8 @@ export const getBestSellers = createAsyncThunk(
     }
   }
 );
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 
 
@@ -280,6 +286,7 @@ export const productSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
+<<<<<<< HEAD
       .addCase(getProductPriceReverse.pending, (state) => {
         state.isLoading = true;
       })
@@ -295,6 +302,8 @@ export const productSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
       .addCase(getProductPriceTo.pending, (state) => {
         state.isLoading = true;
       })
@@ -376,7 +385,10 @@ export const productSlice = createSlice({
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
       .addCase(resetState, () => initialState);
   },
 });

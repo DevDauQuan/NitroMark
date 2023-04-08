@@ -2,10 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import Container from "../components/Container";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { applyCoupon, createOrder, getaUserCart } from "../features/user/userSlice";
 import { debounce } from 'lodash';
 import { BsCart4 } from "react-icons/bs"
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+import { useDispatch, useSelector } from "react-redux";
+import { applyCoupon, createOrder, getaUserCart } from "../features/user/userSlice";
+import { debounce } from 'lodash';
+
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 const Checkout = () => {
   const [coupon, setCoupon] = useState("");
   const [name, setName] = useState("");
@@ -34,7 +45,10 @@ const Checkout = () => {
     }, 5000)
   }
 
+<<<<<<< HEAD
   // console.log(orders);
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
   const handlePayment = () => {
     const values = {
       COD: true,
@@ -47,7 +61,21 @@ const Checkout = () => {
     // console.log(value);
     dispatch(createOrder(values))
   }
+<<<<<<< HEAD
   console.log(orders);
+=======
+
+<<<<<<< HEAD
+=======
+=======
+import { useSelector } from "react-redux";
+
+const Checkout = () => {
+  const { orders } = useSelector((state) => state.auth);
+  const shipChart = 10;
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
   return (
     <>
       <Container class1="checkout-wrapper py-5 home-wrapper-2">
@@ -87,7 +115,19 @@ const Checkout = () => {
               </nav>
               <h4 className="title total">Contact Information</h4>
               <p className="user-details total">
+<<<<<<< HEAD
                 {userinfo?.user?.lastname} {userinfo?.user?.firstname} {`(${userinfo?.user?.email})`}
+=======
+<<<<<<< HEAD
+                {userinfo?.user?.lastname} {userinfo?.user?.firstname} {`(${userinfo?.user?.email})`}
+=======
+<<<<<<< HEAD
+                {userinfo?.user?.lastname} {userinfo?.user?.firstname} {`(${userinfo?.user?.email})`}
+=======
+                Nguyen Duy Nien (ngdnien@gmail.com)
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
               </p>
               <h4 className="mb-3">Shipping Infomation</h4>
               <form
@@ -157,6 +197,7 @@ const Checkout = () => {
               </form>
             </div>
           </div>
+<<<<<<< HEAD
           {
             orders?.products?.length > 0 ?
               <div className="col-5">
@@ -217,6 +258,86 @@ const Checkout = () => {
               </div>
           }
 
+=======
+          <div className="col-5">
+            <div className="border-bottom py-4">
+              {orders &&
+                orders?.products?.map((product, index) => (
+                  <div className="d-flex gap-10 mb-2 align-align-items-center" key={index}>
+                    <div className="w-75 d-flex gap-10">
+
+                      <div className="w-25 position-relative">
+                        <span
+                          style={{ top: "-10px", right: "2px" }}
+                          className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
+                        >
+                          {`${product?.count}`}
+                        </span>
+                        <img className="img-fluid" src={product?.images[1]?.url || ""} alt="product" />
+                      </div>
+                      <div>
+                        <h5 className="total-price">Total price</h5>
+                        <p className="total-price">$ {`${product?.price}`}</p>
+                      </div>
+                    </div>
+                    <div className="flex-grow-1">
+                      <h5 className="total">$ {`${product?.price * product?.count}`}</h5>
+                    </div>
+                  </div>
+                ))}
+
+            </div>
+            <div className="border-bottom py-4">
+              <div className="d-flex justify-content-between align-items-center">
+                <p className="total">Subtotal</p>
+<<<<<<< HEAD
+                <p className="total-price">$ {`${orders?.cartTotal || "0"}`}</p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
+                <p className=" total">Shipping</p>
+                <p className="mb-0 total-price">$ {`${shipChart || "0"}`}</p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
+                <p className="mb-0 total">Price in Discount</p>
+                <p className="mb-0 total-price">-$ {`${orders?.cartTotal - orders?.totalAfterDiscount || "0"}`}</p>
+=======
+<<<<<<< HEAD
+                <p className="total-price">$ {`${orders?.cartTotal || "0"}`}</p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
+                <p className=" total">Shipping</p>
+                <p className="mb-0 total-price">$ {`${shipChart || "0"}`}</p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
+                <p className="mb-0 total">Price in Discount</p>
+                <p className="mb-0 total-price">-$ {`${orders?.cartTotal - orders?.totalAfterDiscount || "0"}`}</p>
+=======
+                <p className="total-price">$ {`${orders?.cartTotal}`}</p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
+                <p className="mb-0 total">Shipping</p>
+                <p className="mb-0 total-price">$ {`${shipChart}`}</p>
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+              </div>
+            </div>
+            <div className="d-flex justify-content-between align-items-center border-bootom py-4">
+              <h4 className="total">Total</h4>
+<<<<<<< HEAD
+              <h5 className="total-price">$ {`${orders?.totalAfterDiscount + shipChart || "0"}`}</h5>
+=======
+<<<<<<< HEAD
+              <h5 className="total-price">$ {`${orders?.totalAfterDiscount + shipChart || "0"}`}</h5>
+=======
+              <h5 className="total-price">$ {`${orders?.cartTotal + shipChart}`}</h5>
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+            </div>
+            <Link onClick={handlePayment} className="button " style={{ marginLeft: "400px" }}>
+              Payment
+            </Link>
+          </div>
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
         </div>
       </Container>
     </>

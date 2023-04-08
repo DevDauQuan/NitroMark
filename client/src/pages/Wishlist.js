@@ -37,7 +37,14 @@ const Wishlist = () => {
           </div>
         </div>
       )}
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
       <Container class1="wishlist-wrapper home-wrapper-2 py-5">
         <div className="row">
           {wishlist && wishlist?.map((item, index) => (
@@ -53,7 +60,14 @@ const Wishlist = () => {
                       src={`${item?.images[0].url}`}
                       className="img-fluid w-100"
                       alt="watch"
+<<<<<<< HEAD
                       style={{ minHeight: "269px", objectFit: "cover" }}
+=======
+<<<<<<< HEAD
+                      style={{ minHeight: "269px", objectFit: "cover" }}
+=======
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                     />
                   </div>
                   <div className="py-3 px-3 d-flex align-items-center">

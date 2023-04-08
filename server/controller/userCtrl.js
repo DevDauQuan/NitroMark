@@ -32,15 +32,23 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
     // kiểm tra xem người dùng có tồn tại hay không bằng cách tìm kiếm trong cơ sở dữ liệu
     const user = await User.findOne({ email });
     if (!user) {
+<<<<<<< HEAD
         // throw new Error("Invalid email or password");
         return res.status(400).json({ message: "Invalid email or password" });
+=======
+        throw new Error("Invalid email or password");
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     }
 
     // kiểm tra xem mật khẩu có khớp không
     const isMatch = await user.isPasswordMatched(password);
     if (!isMatch) {
+<<<<<<< HEAD
         // throw new Error("Invalid email or password");
         return res.status(400).json({ message: "Invalid email or password" });
+=======
+        throw new Error("Invalid email or password");
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     }
 
     // tạo một refreshToken mới và lưu vào database
@@ -50,7 +58,15 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
 
     // gửi cookie refreshToken đến trình duyệt của người dùng
     res.cookie("refreshToken", refreshToken, {
+<<<<<<< HEAD
         httpOnly: true,
+=======
+<<<<<<< HEAD
+        httpOnly: true,
+=======
+        httpOnly: true, secure: true,
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
         maxAge: 72 * 60 * 60 * 1000, // thời gian sống của cookie
     });
     // gửi phản hồi HTTP về thông tin người dùng
@@ -60,7 +76,19 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
         lastname: user.lastname,
         email: user.email,
         mobile: user.mobile,
+<<<<<<< HEAD
         token: refreshToken,
+=======
+<<<<<<< HEAD
+        token: refreshToken,
+=======
+<<<<<<< HEAD
+        token: refreshToken,
+=======
+        token: generateToken(user._id),
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     });
 });
 
@@ -100,7 +128,19 @@ const loginAdmin = asyncHandler(async (req, res) => {
 //refreshToken
 const handleRefreshToken = asyncHandler(async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
+<<<<<<< HEAD
     // console.log(req.cookies);
+=======
+<<<<<<< HEAD
+    // console.log(req.cookies);
+=======
+<<<<<<< HEAD
+    // console.log(req.cookies);
+=======
+    console.log(req.cookies);
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     if (!refreshToken) throw new Error("No Refresh Token in Cookies");
 
     try {
@@ -127,6 +167,16 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
 });
 //logout 
 const logout = asyncHandler(async (req, res) => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     res.clearCookie("refreshToken", {
         path: "/",
         httpOnly: true,
@@ -433,6 +483,7 @@ const removeProductFromCart = asyncHandler(async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 const updateProductFromCart = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { quantity } = req.body;
@@ -461,6 +512,9 @@ const updateProductFromCart = asyncHandler(async (req, res) => {
         throw new Error(error);
     }
 });
+=======
+
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 //user cart
 // const userCart = asyncHandler(async (req, res) => {
@@ -655,7 +709,11 @@ const getOrderByUserId = asyncHandler(async (req, res) => {
             .populate("products.product")
             .populate("orderby")
             .exec();
+<<<<<<< HEAD
         // console.log(userorders);
+=======
+        console.log(id);
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
         res.json(userorders);
     } catch (error) {
         throw new Error(error);
@@ -694,6 +752,7 @@ const deleteOrder = asyncHandler(async (req, res) => {
         throw new Error(error);
     }
 })
+<<<<<<< HEAD
 
 const SearchUser = asyncHandler(async (req, res) => {
     const keyword = req.query.title;
@@ -702,3 +761,6 @@ const SearchUser = asyncHandler(async (req, res) => {
     res.json(users);
 })
 module.exports = { createUser, loginUserCtrl, getAllUser, getUser, deleteUser, updateUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, getAllOrders, getOrderByUserId, updateOrderStatus, deleteOrder, removeProductFromCart, updateProductFromCart, SearchUser }
+=======
+module.exports = { createUser, loginUserCtrl, getAllUser, getUser, deleteUser, updateUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, getAllOrders, getOrderByUserId, updateOrderStatus, deleteOrder, removeProductFromCart }
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c

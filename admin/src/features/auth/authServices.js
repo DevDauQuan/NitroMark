@@ -104,7 +104,11 @@ const authService = {
   blockUser,
   unBlockUser,
   updateUser,
+<<<<<<< HEAD
   refreshToken,
+=======
+  refreshToken
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 };
 
 export default authService;

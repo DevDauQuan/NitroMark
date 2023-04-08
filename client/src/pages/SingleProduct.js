@@ -13,16 +13,23 @@ import { addtoCart, getWishList } from "../features/user/userSlice";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { TransformComponent, TransformWrapper } from "@kokarn/react-zoom-pan-pinch"
+<<<<<<< HEAD
 import { toast } from "react-toastify";
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 let schema = yup.object().shape({
   comment: yup.string().required("Comment is Required"),
   star: yup.number(),
 });
 
+<<<<<<< HEAD
 const getUserfromLocalStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
   : null;
+=======
+
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -37,6 +44,21 @@ const SingleProduct = () => {
 
   }, [dispatch, id]);
 
+<<<<<<< HEAD
+
+  const closeModal = () => { };
+
+  const { productInfo, products } = useSelector((state) => state.products);
+  const { wishlist } = useSelector((state) => state.products);
+
+  const featuredProducts = products?.filter((product) => product?.tags === "popular")
+    .map((product) => (
+      <ProductCard key={product?._id} product={product} />
+    ));
+=======
+  // eslint-disable-next-line
+  const [orderedProduct, setorderedProduct] = useState(true);
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
   const closeModal = () => { };
 
@@ -48,6 +70,19 @@ const SingleProduct = () => {
       <ProductCard key={product?._id} product={product} />
     ));
 
+
+  useEffect(() => {
+    setImageZoom(productInfo?.images[0].url)
+  }, [productInfo?.images])
+
+  useEffect(() => {
+    if (wishlist?.wishlist.includes(productInfo?._id)) {
+      setInWishList(true);
+    }
+    else {
+      setInWishList(false);
+    }
+  }, [productInfo?._id, wishlist?.wishlist])
 
   useEffect(() => {
     setImageZoom(productInfo?.images[0].url)
@@ -80,10 +115,13 @@ const SingleProduct = () => {
   }
 
   const handleAddtoWishList = () => {
+<<<<<<< HEAD
     if (!getUserfromLocalStorage) {
       toast.error("Please Login now");
       return;
     }
+=======
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     const values = {
       id: id
     }
@@ -109,10 +147,23 @@ const SingleProduct = () => {
     formik.setFieldValue("star", newRating);
   }
 
+<<<<<<< HEAD
   return (
     <>
       <Meta title={`${productInfo?.title}`} />
       <BreadCrumb title={`${productInfo?.title}`} />
+=======
+
+  return (
+    <>
+<<<<<<< HEAD
+      <Meta title={`${productInfo?.title}`} />
+      <BreadCrumb title={`${productInfo?.title}`} />
+=======
+      <Meta title={"Product Name"} />
+      <BreadCrumb title="Product Name" />
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
       <Container class1="main-product-wrapper py-5 home-wrapper-2" >
         <div className="row">
           <div className="col-6">
@@ -120,7 +171,15 @@ const SingleProduct = () => {
               <div>
                 <TransformWrapper defaultScale={1} defaultPositionX={100} defaultPositionY={200}>
                   <TransformComponent>
+<<<<<<< HEAD
                     <img src={imgZoom} alt="" style={{ objectFit: "contain" }} />
+=======
+<<<<<<< HEAD
+                    <img src={imgZoom} alt="" style={{ objectFit: "contain" }} />
+=======
+                    <img src={imgZoom} alt="" />
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                   </TransformComponent>
 
                 </TransformWrapper>
@@ -153,11 +212,18 @@ const SingleProduct = () => {
                   {productInfo && <ReactStars
                     count={5}
                     size={24}
+<<<<<<< HEAD
                     value={productInfo && Number(productInfo?.totalrating)}
                     edit={false}
                     activeColor="#ffd700"
                   />}
                   {/* {productInfo && console.log(Number(productInfo?.totalrating))} */}
+=======
+                    value={productInfo?.totalrating ?? 0}
+                    edit={false}
+                    activeColor="#ffd700"
+                  />
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                   <p className="mb-0 t-review">{`${productInfo?.ratings?.length} reviews`}</p>
                 </div>
                 <a className="review-btn" href="#review">
@@ -378,9 +444,13 @@ const SingleProduct = () => {
                 <div className="d-flex flex-column flex-grow-1 w-50">
                   <h6 className="mb-3">{productInfo?.title}</h6>
                   <p className="mb-1">Quantity: {`${quantity}`}</p>
+<<<<<<< HEAD
                   <p className="mb-1">Color:
                     <div style={{ backgroundColor: productInfo?.color, width: "40px", height: "20px", display: "inline-block", margin: "0 8px" }}></div>
                   </p>
+=======
+                  <p className="mb-1">Color: Chua co</p>
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
                 </div>
               </div>
             </div>

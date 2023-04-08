@@ -7,14 +7,35 @@ import userAva from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 import { getaUserCart, getOrderByUser, getUser, getWishList, logoutUser, } from "../features/user/userSlice";
 import { getCategories } from "../features/pCategory/pCategorySlice";
 import { getProductCategory, getProductonSearch, getProducts } from "../features/products/productSlice";
 import { getBlogCategory, getBlogs } from "../features/blog/blogSlice";
+<<<<<<< HEAD
 
 const getUserfromLocalStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
   : null;
+=======
+const getUserfromLocalStorage = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
+=======
+<<<<<<< HEAD
+import { getaUserCart, getOrderByUser, getUser, getWishList, logoutUser, } from "../features/user/userSlice";
+=======
+import { getaUserCart, getUser, getWishList, logoutUser, } from "../features/user/userSlice";
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+import { getCategories } from "../features/pCategory/pCategorySlice";
+import { getProductCategory, getProductonSearch, getProducts } from "../features/products/productSlice";
+import { getBlogCategory, getBlogs } from "../features/blog/blogSlice";
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,7 +46,18 @@ const Header = () => {
     dispatch(getProducts());
     dispatch(getBlogCategory());
     dispatch(getBlogs());
+<<<<<<< HEAD
     dispatch(getOrderByUser());
+=======
+<<<<<<< HEAD
+    dispatch(getOrderByUser());
+=======
+<<<<<<< HEAD
+    dispatch(getOrderByUser());
+=======
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
   }, [dispatch]);
 
 
@@ -33,12 +65,31 @@ const Header = () => {
   const { user, orders } = useSelector((state) => state.auth);
 
   useEffect(() => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
     if (getUserfromLocalStorage) {
       dispatch(getaUserCart());
       dispatch(getWishList());
       dispatch(getUser(user?._id));
     }
   }, [user?._id, dispatch])
+<<<<<<< HEAD
+=======
+=======
+    if (user) {
+      dispatch(getaUserCart());
+      dispatch(getWishList());
+      dispatch(getUser(user._id));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9f19b3122122231ef1eb29c6a78e4f9dede688e6
+    }
+  }, [user, dispatch])
+>>>>>>> 7852f0825f5f00fa43e06f89d3397a02f26ff9f8
+>>>>>>> 3e4dd3a83de174f915bccce2e0aa19690d78373c
 
   const handleGetCategory = (category) => {
     dispatch(getProductCategory(category))
